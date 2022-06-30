@@ -1,0 +1,21 @@
+{
+  "name": "steamboost-hours",
+  "version": "1.0.0",
+  "description": "A script to boost hours in Steam games.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Steam",
+    "Boost",
+    "Hours"
+  ],
+  "author": "twentytwo777",
+  "license": "MIT",
+  "dependencies": {
+    "node-steam": "^0.0.1",
+    "readline": "^1.3.0",
+    "steam-user": "^4.24.3"
+  }
+}
