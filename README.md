@@ -1,5 +1,5 @@
 # Steam-HourBoost
-A script to boost hours in Steam games.
+### A script to boost hours in Steam games.
 
 ## How to install?
 #### Run the command in the folder with the script:
