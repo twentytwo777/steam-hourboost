@@ -9,10 +9,10 @@
 
 ## Where can I find app-id?
 #### Open the page of the game you want to boost in your browser and copy the numbers below from the address bar:
+<img align=center src="https://i.imgur.com/UaeBeaE.png"/>
 
 ## How to install?
 #### Run the command in the folder with the script:
-<img align=center src="https://i.imgur.com/UaeBeaE.png"/>
 
 ```sh
 npm i
