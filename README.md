@@ -10,6 +10,7 @@
 ## Where can I find app-id?
 #### Open the page of the game you want to boost in your browser and copy the numbers below from the address bar:
 <img align=center src="https://i.imgur.com/UaeBeaE.png"/>
+
 #### How do you copy the app-id and paste it into the steam-games.json file
 
 ## How to install?
