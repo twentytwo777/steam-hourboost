@@ -77,7 +77,7 @@ class SteamBoost {
             return console.log('Error logging in.');
         });
 
-        steamClient.on('error', e => console.log(`${e}`));
+        steamClient.on('error', e => console.log(`${e} (Script still working)`));
         steamClientUser.on('error', e => {
             console.log(`${e}`);
             process.exit();
