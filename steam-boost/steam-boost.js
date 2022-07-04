@@ -1,15 +1,10 @@
-const steam = require('node-steam');
-const steamUser = require('steam-user');
+// Steam
+const steam = require('steam-user');
 const readline = require('readline');
-const process = require('process');
-const steamGames = require('./steam-games.json');
+const games = require('./steam-games.json');
 
-const steamClient = new steam.SteamClient();
-const steamClientUser = new steamUser(steamClient);
-const readInterface = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+const user = new steam();
+const readInterface = readline.createInterface({input: process.stdin, output: process.stdout});
 
 class SteamBoost {
     constructor() {
@@ -17,69 +12,52 @@ class SteamBoost {
         this.init();
     };
 
-    async init() {
-        process.title = 'Steam HoursBoost by twentytwo777';
+    init() {
         this.initDataAccount();
     };
 
     initDataAccount() {
-        readInterface.question(`Enter your login Steam account: `, login => {
-            this.dataAccount.push(login.trim());
+        readInterface.question('Enter your login Steam account: ', login => {
+            this.dataAccount.push(login);
 
-            readInterface.question(`Enter your password Steam account: `, password => {
-                this.dataAccount.push(password.trim());
+            readInterface.question('Enter your password Steam account: ', password => {
+                this.dataAccount.push(password);
                 this.SteamInitConnect();
             });
         });
     };
 
     SteamInitConnect() {
-        console.log('Connecting to Steam...');
+        console.log('Logging in...');
 
-        steamClient.connect();
-        steamClient.on('connected', _ => {
-            console.log('Connected to Steam.');
-            console.log('Logging in...');
+        if (this.dataAccount[0] == '' || this.dataAccount[1] == '') {
+            console.log('Login or password is empty.');
+            process.exit();
+        };
 
-            if (this.dataAccount[0] === '' || this.dataAccount[1] === '') {
-                console.log('Login or password is empty.');
-                process.exit();
-            };
-
-            steamClientUser.logOn({
-                accountName: this.dataAccount[0],
-                password: this.dataAccount[1]
-            });
-        });
-
-        steamClientUser.on('steamGuard', (domain, callback) => {
+        user.logOn({accountName: this.dataAccount[0], password: this.dataAccount[1]});
+        user.on('steamGuard', (domain, callback) => {
             domain == null ? console.log('Find Steam Guard Code in Mobile App.') : console.log(`Find Steam Guard Code in mail (${domain}).`);
 
-            readInterface.question(`Enter Steam Guard Code: `, code => {
-                callback(code.trim());
+            readInterface.question('Enter Steam Guard Code: ', code => {
+                callback(code);
                 readInterface.close();
             });
         });
 
-        steamClientUser.on('loggedOn', response => {
-            if (response.eresult === steam.EResult.OK) {
-                console.log('Logged in.');
+        user.on('loggedOn', _ => {
+            console.log('Logged in.');
 
-                console.log('Set status on online...');
-                steamClientUser.setPersona(steam.EPersonaState.Online);
+            user.setPersona(steam.EPersonaState.Online);
+            user.gamesPlayed(games['app-id']);
 
-                console.log('Running game...');
-                console.log('Game running.');
-                
-                return steamClientUser.gamesPlayed(steamGames['app-id']);
-            };
-
-            return console.log('Error logging in.');
+            console.log('Game(-s) running.');
         });
 
-        steamClient.on('error', e => console.log(`${e} (Script still working)`));
-        steamClientUser.on('error', e => {
-            console.log(`${e}`);
+        user.on('error', e => {
+            console.log(`Error logging: ${e.message}`);
+            console.log(`Script will be closed. Please, try again.`);
+            
             process.exit();
         });
     };
