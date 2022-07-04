@@ -11,8 +11,6 @@
 
 <img align=center src="https://i.imgur.com/UaeBeaE.png"/>
 
-#### How do you copy the app-id and paste it into the steam-games.json file
-
 ## How to install?
 #### Run the command in the folder with the script:
 
