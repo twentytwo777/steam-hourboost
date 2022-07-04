@@ -1,3 +1,3 @@
-What do you think should have happened:
-What happened:
-Do you see any meaningful error information in the DevTools?
+- **What do you think should have happened:**
+- **What happened:**
+- **Do you see any meaningful error information in the DevTools?** 
